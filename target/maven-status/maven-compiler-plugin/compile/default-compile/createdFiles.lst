@@ -1,0 +1,3 @@
+gen\test.class
+com\sfpay\util\HelloUtil.class
+com\sfpay\util\SqlUtil.class
