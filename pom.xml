@@ -37,6 +37,19 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <useFile>false</useFile>
+                    <skip>true</skip>
+                    <includes>
+                        <include>**/*Spec.java</include>
+                        <include>**/*Spec.groovy</include>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
                 <version>1.8.0</version>
@@ -69,4 +82,25 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.properties>properties</profile.properties>
+                <profile.logIncFile>properties/logback-inc.xml</profile.logIncFile>
+                <profile.mode>local</profile.mode>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <profile.properties>profiles/${project.artifactId}/properties</profile.properties>
+                <profile.logIncFile>profiles/${project.artifactId}/properties/logback-inc.xml</profile.logIncFile>
+                <profile.mode>product</profile.mode>
+            </properties>
+        </profile>
+    </profiles>
 </project>
